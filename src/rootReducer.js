@@ -12,12 +12,29 @@ const INITIAL_STATE = { items, cart: [] };
 function rootReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     // not necessary now TODO
-    case DISPLAY_ITEMS:
-      return state
     case ATC:
-      return {...state, cart: [...state.cart, action.payload]} //payload corresponds to id
+      for (let i = 0; i < state.cart.length; i++) {
+        if (state.cart[i].id === action.payload.id) {
+          let newQuantity = { ...state.cart[i], quantity: state.cart[i].quantity + 1 };
+          let cart = state.cart.map(el => el.id === newQuantity.id ? newQuantity : el);
+          return { ...state, cart}
+        }
+      }
+      return { ...state, cart: [...state.cart, action.payload] };
+       //payload corresponds to id
     case RFC:
-      return {...state, cart: state.cart.filter(id => id !== action.payload)}
+      for (let i = 0; i < state.cart.length; i++) {
+        if (state.cart[i].id === action.payload.id) {
+
+          let newQuantity = { ...state.cart[i], quantity: state.cart[i].quantity - 1 };
+          let cart = state.cart.map(el => el.id === newQuantity.id ? newQuantity : el);
+          if (newQuantity.quantity === 0) {
+            return { ...state, cart: state.cart.filter(item => item.id !== action.payload.id) }
+          }
+          return { ...state, cart }
+        }
+      }
+      return state;
     default:
       return state
   }

@@ -8,8 +8,8 @@ function Items() {
   const items = useSelector(store => store.items);
   const dispatch = useDispatch();
 
-  const atc = id => dispatch(addToCart(id))
-  const rfc = id => dispatch(removeFromCart(id))
+  const atc = obj => dispatch(addToCart(obj))
+  const rfc = obj => dispatch(removeFromCart(obj))
 
   return (
     <div>

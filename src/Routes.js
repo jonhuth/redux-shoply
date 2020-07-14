@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Items from './Items';
+import { Cart } from './Cart';
 import SpecificItem from './SpecificItem';
 
 
@@ -13,7 +14,10 @@ function Routes() {
       </Route>
       <Route exact path='/'>
           <Items />
-        </Route>
+      </Route>
+      <Route exact path="/cart">
+        <Cart />
+      </Route>
     </Switch>
   )
 }
